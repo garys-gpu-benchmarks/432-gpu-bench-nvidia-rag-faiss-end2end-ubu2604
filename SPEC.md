@@ -36,7 +36,7 @@ summary,700,100,2.0,200,45,180,1,40,200,8,20
 
 ## Metrics
 
-- **#1: E2E, ms** — stored as `end_to_end_query_latency_retrieval_generation_ms`.
+- **#1: E2E mean over queries, ms** — stored as `end_to_end_query_latency_retrieval_generation_ms`.
 - **#2: Generation TTFT, ms** — stored as `generation_phase_time_to_first_token_ms`.
 - **#3: Retrieval latency** — stored as `retrieval_latency_vector_search_ms`.
 - **#4: Gen throughput, tok/s** — stored as `generation_throughput_output_tokens_s`.
