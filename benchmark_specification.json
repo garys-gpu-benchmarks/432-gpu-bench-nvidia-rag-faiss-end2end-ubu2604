@@ -37,7 +37,7 @@
   {
     "field_name": "Metrics",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "#1: E2E mean over queries, ms (end_to_end_query_latency_retrieval_generation_ms); #2: Generation TTFT, ms (generation_phase_time_to_first_token_ms); #3: Retrieval latency (retrieval_latency_vector_search_ms); #4: Gen throughput, tok/s (generation_throughput_output_tokens_s); #5: Embedding throughput (embedding_throughput_docs_s); #6: FAISS index vectors (faiss_index_ntotal)"
+    "value": "#1: E2E mean over queries, ms (end_to_end_query_latency_retrieval_generation_ms); #2: Generation TTFT, ms (generation_phase_time_to_first_token_ms); #3: Retrieval latency (retrieval_latency_vector_search_ms); #4: Gen throughput, tok/s (generation_throughput_output_tokens_s); #5: Embedding throughput, chunks/s (embedding_throughput_chunks_s); #6: FAISS index vectors (faiss_index_ntotal)"
   },
   {
     "field_name": "Command Tools Executed",
@@ -97,7 +97,7 @@
   {
     "field_name": "Raw Output Example",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "check_name,end_to_end_query_latency_retrieval_generation_ms,generation_phase_time_to_first_token_ms,retrieval_latency_vector_search_ms,faiss_index_ntotal,generation_throughput_output_tokens_s,embedding_throughput_docs_s,index_backend,corpus_docs,chunk_count,query_count,chunk_overlap\nsummary,700,100,2.0,200,45,180,1,40,200,8,20"
+    "value": "check_name,end_to_end_query_latency_retrieval_generation_ms,generation_phase_time_to_first_token_ms,retrieval_latency_vector_search_ms,faiss_index_ntotal,generation_throughput_output_tokens_s,embedding_throughput_chunks_s,index_backend,corpus_docs,chunk_count,query_count,chunk_overlap\nsummary,700,100,2.0,200,45,180,1,40,200,8,20"
   },
   {
     "field_name": "run_benchmark Command Plus Options for Smoke Run",
@@ -117,7 +117,7 @@
   {
     "field_name": "Output Fields / Metrics to Parse",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "end_to_end_query_latency_retrieval_generation_ms, generation_phase_time_to_first_token_ms, retrieval_latency_vector_search_ms, generation_throughput_output_tokens_s, embedding_throughput_docs_s"
+    "value": "end_to_end_query_latency_retrieval_generation_ms, generation_phase_time_to_first_token_ms, retrieval_latency_vector_search_ms, generation_throughput_output_tokens_s, embedding_throughput_chunks_s"
   },
   {
     "field_name": "Success Criteria",
@@ -127,7 +127,7 @@
   {
     "field_name": "Parser and Normalization Notes",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "pass1, pass2, and summary are three copies of one aggregate. embedding_throughput_docs_s is chunks divided by embed time. A non-FAISS vector_db still uses FAISS. queries.csv has one row per measured query"
+    "value": "pass1, pass2, and summary are three copies of one aggregate. embedding_throughput_chunks_s is chunks divided by embed time. A non-FAISS vector_db still uses FAISS. queries.csv has one row per measured query"
   },
   {
     "field_name": "Hardware Config",
