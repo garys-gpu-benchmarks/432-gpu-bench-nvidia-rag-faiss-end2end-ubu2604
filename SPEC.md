@@ -19,7 +19,7 @@ Runs scripts/gpu-bench-rag-faiss-end2end.py: load rajpurkar/squad_v2, embed with
 | top_k | `--top-k` | smoke=5, baseline=5, extended=5 | 5 | From Parameter list; see Execution Description With Parameters. |
 | query_length | `--query-length` | smoke=32, baseline=32, extended=32 | 32 | From Parameter list; see Execution Description With Parameters. |
 | batch_size | `--batch-size` | smoke=2, baseline=8, extended=8 | 8 | From Parameter list; see Execution Description With Parameters. |
-| query_count | `--query-count` | smoke=2, baseline=13, extended=40 | 13 | From Parameter list; see Execution Description With Parameters. |
+| query_count | `--query-count` | smoke=2, baseline=45, extended=140 | 45 | From Parameter list; see Execution Description With Parameters. |
 
 ## Invocation
 

@@ -27,5 +27,5 @@ sweep:
     extended: 8
   query_count:
     smoke: 2
-    baseline: 13
-    extended: 40
+    baseline: 45
+    extended: 140
