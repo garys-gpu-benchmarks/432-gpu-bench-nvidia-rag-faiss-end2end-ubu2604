@@ -45,18 +45,16 @@ Validation and logging:
   --save-options-file <path>    Write resolved CLI options to PATH
 
 Workload options:
-  --corpus-dataset <value>            Override corpus_dataset
   --chunk-size <value>            Override chunk_size
   --chunk-overlap <value>            Override chunk_overlap
-  --embedding-model <value>            Override embedding_model
-  --vector-db <value>            Override vector_db
-  --llm-model <value>            Override llm_model
-  --reranker-model <value>            Override reranker_model
-  --retrieval-strategy <value>            Override retrieval_strategy
+  --corpus-dataset <value>            Override corpus_dataset
   --top-k <value>            Override top_k
+  --embedding-model <value>            Override embedding_model
   --query-length <value>            Override query_length
   --batch-size <value>            Override batch_size
+  --llm-model <value>            Override llm_model
   --query-count <value>            Override query_count
+  --reranker-model <value>            Override reranker_model
 
 Information:
   --specification               Print this workload's specification and exit
@@ -90,18 +88,16 @@ QUIET=0
 LOG_LEVEL_VALUE="INFO"
 OUTPUT_FORMAT=""
 SAVE_OPTIONS_FILE=""
-CORPUS_DATASET=""
 CHUNK_SIZE=""
 CHUNK_OVERLAP=""
-EMBEDDING_MODEL=""
-VECTOR_DB=""
-LLM_MODEL=""
-RERANKER_MODEL=""
-RETRIEVAL_STRATEGY=""
+CORPUS_DATASET=""
 TOP_K=""
+EMBEDDING_MODEL=""
 QUERY_LENGTH=""
 BATCH_SIZE=""
+LLM_MODEL=""
 QUERY_COUNT=""
+RERANKER_MODEL=""
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -122,18 +118,16 @@ while [[ $# -gt 0 ]]; do
     --log-level) LOG_LEVEL_VALUE="${2:-}"; shift 2 ;;
     --output-format) OUTPUT_FORMAT="${2:-}"; shift 2 ;;
     --save-options-file) SAVE_OPTIONS_FILE="${2:-}"; shift 2 ;;
-    --corpus-dataset) CORPUS_DATASET="${2:-}"; shift 2 ;;
     --chunk-size) CHUNK_SIZE="${2:-}"; shift 2 ;;
     --chunk-overlap) CHUNK_OVERLAP="${2:-}"; shift 2 ;;
-    --embedding-model) EMBEDDING_MODEL="${2:-}"; shift 2 ;;
-    --vector-db) VECTOR_DB="${2:-}"; shift 2 ;;
-    --llm-model) LLM_MODEL="${2:-}"; shift 2 ;;
-    --reranker-model) RERANKER_MODEL="${2:-}"; shift 2 ;;
-    --retrieval-strategy) RETRIEVAL_STRATEGY="${2:-}"; shift 2 ;;
+    --corpus-dataset) CORPUS_DATASET="${2:-}"; shift 2 ;;
     --top-k) TOP_K="${2:-}"; shift 2 ;;
+    --embedding-model) EMBEDDING_MODEL="${2:-}"; shift 2 ;;
     --query-length) QUERY_LENGTH="${2:-}"; shift 2 ;;
     --batch-size) BATCH_SIZE="${2:-}"; shift 2 ;;
+    --llm-model) LLM_MODEL="${2:-}"; shift 2 ;;
     --query-count) QUERY_COUNT="${2:-}"; shift 2 ;;
+    --reranker-model) RERANKER_MODEL="${2:-}"; shift 2 ;;
     --help|--specification|--matrix-definition) shift ;;
     *) die "Unknown option: $1" ;;
   esac
@@ -172,35 +166,31 @@ print("" if raw_value is None else raw_value)
 PY
 }
 
-CORPUS_DATASET="${CORPUS_DATASET:-$(yaml_get corpus_dataset)}"
 CHUNK_SIZE="${CHUNK_SIZE:-$(yaml_get chunk_size)}"
 CHUNK_OVERLAP="${CHUNK_OVERLAP:-$(yaml_get chunk_overlap)}"
-EMBEDDING_MODEL="${EMBEDDING_MODEL:-$(yaml_get embedding_model)}"
-VECTOR_DB="${VECTOR_DB:-$(yaml_get vector_db)}"
-LLM_MODEL="${LLM_MODEL:-$(yaml_get llm_model)}"
-RERANKER_MODEL="${RERANKER_MODEL:-$(yaml_get reranker_model)}"
-RETRIEVAL_STRATEGY="${RETRIEVAL_STRATEGY:-$(yaml_get retrieval_strategy)}"
+CORPUS_DATASET="${CORPUS_DATASET:-$(yaml_get corpus_dataset)}"
 TOP_K="${TOP_K:-$(yaml_get top_k)}"
+EMBEDDING_MODEL="${EMBEDDING_MODEL:-$(yaml_get embedding_model)}"
 QUERY_LENGTH="${QUERY_LENGTH:-$(yaml_get query_length)}"
 BATCH_SIZE="${BATCH_SIZE:-$(yaml_get batch_size)}"
+LLM_MODEL="${LLM_MODEL:-$(yaml_get llm_model)}"
 QUERY_COUNT="${QUERY_COUNT:-$(yaml_get query_count)}"
+RERANKER_MODEL="${RERANKER_MODEL:-$(yaml_get reranker_model)}"
 OUTPUT_FORMAT="${OUTPUT_FORMAT:-$(yaml_get output_format)}"
 OUTPUT_FORMAT="${OUTPUT_FORMAT:-csv}"
 
 BENCHMARK_RUN_COMMAND="bash run_benchmark.sh --${PROFILE}"
 [[ "${VALIDATE}" -eq 1 ]] && BENCHMARK_RUN_COMMAND+=" --validate"
-[[ -n "${CORPUS_DATASET}" ]] && BENCHMARK_RUN_COMMAND+=" --corpus-dataset $(printf %q "${CORPUS_DATASET}")"
 [[ -n "${CHUNK_SIZE}" ]] && BENCHMARK_RUN_COMMAND+=" --chunk-size $(printf %q "${CHUNK_SIZE}")"
 [[ -n "${CHUNK_OVERLAP}" ]] && BENCHMARK_RUN_COMMAND+=" --chunk-overlap $(printf %q "${CHUNK_OVERLAP}")"
-[[ -n "${EMBEDDING_MODEL}" ]] && BENCHMARK_RUN_COMMAND+=" --embedding-model $(printf %q "${EMBEDDING_MODEL}")"
-[[ -n "${VECTOR_DB}" ]] && BENCHMARK_RUN_COMMAND+=" --vector-db $(printf %q "${VECTOR_DB}")"
-[[ -n "${LLM_MODEL}" ]] && BENCHMARK_RUN_COMMAND+=" --llm-model $(printf %q "${LLM_MODEL}")"
-[[ -n "${RERANKER_MODEL}" ]] && BENCHMARK_RUN_COMMAND+=" --reranker-model $(printf %q "${RERANKER_MODEL}")"
-[[ -n "${RETRIEVAL_STRATEGY}" ]] && BENCHMARK_RUN_COMMAND+=" --retrieval-strategy $(printf %q "${RETRIEVAL_STRATEGY}")"
+[[ -n "${CORPUS_DATASET}" ]] && BENCHMARK_RUN_COMMAND+=" --corpus-dataset $(printf %q "${CORPUS_DATASET}")"
 [[ -n "${TOP_K}" ]] && BENCHMARK_RUN_COMMAND+=" --top-k $(printf %q "${TOP_K}")"
+[[ -n "${EMBEDDING_MODEL}" ]] && BENCHMARK_RUN_COMMAND+=" --embedding-model $(printf %q "${EMBEDDING_MODEL}")"
 [[ -n "${QUERY_LENGTH}" ]] && BENCHMARK_RUN_COMMAND+=" --query-length $(printf %q "${QUERY_LENGTH}")"
 [[ -n "${BATCH_SIZE}" ]] && BENCHMARK_RUN_COMMAND+=" --batch-size $(printf %q "${BATCH_SIZE}")"
+[[ -n "${LLM_MODEL}" ]] && BENCHMARK_RUN_COMMAND+=" --llm-model $(printf %q "${LLM_MODEL}")"
 [[ -n "${QUERY_COUNT}" ]] && BENCHMARK_RUN_COMMAND+=" --query-count $(printf %q "${QUERY_COUNT}")"
+[[ -n "${RERANKER_MODEL}" ]] && BENCHMARK_RUN_COMMAND+=" --reranker-model $(printf %q "${RERANKER_MODEL}")"
 set_benchmark_run_command "${BENCHMARK_RUN_COMMAND}"
 
 HOSTNAME_VALUE="$(hostname -s 2>/dev/null || hostname)"
@@ -243,18 +233,16 @@ run_collection() {
     collect_args+=(--device-id "${DEVICE_ID:-0}")
   fi
   grep -q -- '--output-format' <<<"${help}" && collect_args+=(--output-format "${OUTPUT_FORMAT}")
-  grep -q -- '--corpus-dataset' <<<"${help}" && collect_args+=(--corpus-dataset "${CORPUS_DATASET}")
   grep -q -- '--chunk-size' <<<"${help}" && collect_args+=(--chunk-size "${CHUNK_SIZE}")
   grep -q -- '--chunk-overlap' <<<"${help}" && collect_args+=(--chunk-overlap "${CHUNK_OVERLAP}")
-  grep -q -- '--embedding-model' <<<"${help}" && collect_args+=(--embedding-model "${EMBEDDING_MODEL}")
-  grep -q -- '--vector-db' <<<"${help}" && collect_args+=(--vector-db "${VECTOR_DB}")
-  grep -q -- '--llm-model' <<<"${help}" && collect_args+=(--llm-model "${LLM_MODEL}")
-  grep -q -- '--reranker-model' <<<"${help}" && collect_args+=(--reranker-model "${RERANKER_MODEL}")
-  grep -q -- '--retrieval-strategy' <<<"${help}" && collect_args+=(--retrieval-strategy "${RETRIEVAL_STRATEGY}")
+  grep -q -- '--corpus-dataset' <<<"${help}" && collect_args+=(--corpus-dataset "${CORPUS_DATASET}")
   grep -q -- '--top-k' <<<"${help}" && collect_args+=(--top-k "${TOP_K}")
+  grep -q -- '--embedding-model' <<<"${help}" && collect_args+=(--embedding-model "${EMBEDDING_MODEL}")
   grep -q -- '--query-length' <<<"${help}" && collect_args+=(--query-length "${QUERY_LENGTH}")
   grep -q -- '--batch-size' <<<"${help}" && collect_args+=(--batch-size "${BATCH_SIZE}")
+  grep -q -- '--llm-model' <<<"${help}" && collect_args+=(--llm-model "${LLM_MODEL}")
   grep -q -- '--query-count' <<<"${help}" && collect_args+=(--query-count "${QUERY_COUNT}")
+  grep -q -- '--reranker-model' <<<"${help}" && collect_args+=(--reranker-model "${RERANKER_MODEL}")
 
   printf -v collect_cmd '%q ' "${PYTHON_BIN}" scripts/collect_workload.py "${collect_args[@]}"
   echo "[RUN] ${collect_cmd}"

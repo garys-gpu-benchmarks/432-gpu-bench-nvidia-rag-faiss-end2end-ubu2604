@@ -2,24 +2,22 @@
 
 ## Execution Description
 
-Runs scripts/gpu-bench-rag-faiss-end2end.py: load rajpurkar/squad_v2, embed with BAAI/bge-small-en-v1.5, search FAISS IndexFlatIP, rerank with BAAI/bge-reranker-base, and generate with mistralai/Mistral-7B-v0.3 for the yaml query_count. output_format: csv Sweep dimensions: corpus_dataset, chunk_size, chunk_overlap, embedding_model, vector_db, llm_model, reranker_model, retrieval_strategy.
+Runs scripts/gpu-bench-rag-faiss-end2end.py: load rajpurkar/squad_v2, embed with BAAI/bge-small-en-v1.5, search FAISS IndexFlatIP, rerank with BAAI/bge-reranker-base, and generate with mistralai/Mistral-7B-v0.3 for the yaml query_count. output_format: csv Sweep dimensions: chunk_size, chunk_overlap, corpus_dataset, top_k, embedding_model, query_length, batch_size, llm_model.
 
 ## Parameters
 
 | Parameter | CLI Flag | Tested Values | Default | Description |
 | --- | --- | --- | --- | --- |
-| corpus_dataset | `--corpus-dataset` | smoke=rajpurkar/squad_v2, baseline=rajpurkar/squad_v2, extended=rajpurkar/squad_v2 | rajpurkar/squad_v2 | From Parameter list; see Execution Description With Parameters. |
 | chunk_size | `--chunk-size` | smoke=64, baseline=256, extended=256 | 256 | From Parameter list; see Execution Description With Parameters. |
 | chunk_overlap | `--chunk-overlap` | smoke=32, baseline=32, extended=32 | 32 | From Parameter list; see Execution Description With Parameters. |
-| embedding_model | `--embedding-model` | smoke=BAAI/bge-small-en-v1.5, baseline=BAAI/bge-small-en-v1.5, extended=BAAI/bge-small-en-v1.5 | BAAI/bge-small-en-v1.5 | From Parameter list; see Execution Description With Parameters. |
-| vector_db | `--vector-db` | smoke=faiss, baseline=faiss, extended=faiss | faiss | From Parameter list; see Execution Description With Parameters. |
-| llm_model | `--llm-model` | smoke=mistralai/Mistral-7B-v0.3, baseline=mistralai/Mistral-7B-v0.3, extended=mistralai/Mistral-7B-v0.3 | mistralai/Mistral-7B-v0.3 | From Parameter list; see Execution Description With Parameters. |
-| reranker_model | `--reranker-model` | smoke=BAAI/bge-reranker-base, baseline=BAAI/bge-reranker-base, extended=BAAI/bge-reranker-base | BAAI/bge-reranker-base | From Parameter list; see Execution Description With Parameters. |
-| retrieval_strategy | `--retrieval-strategy` | smoke=dense, baseline=dense, extended=dense | dense | From Parameter list; see Execution Description With Parameters. |
+| corpus_dataset | `--corpus-dataset` | smoke=rajpurkar/squad_v2, baseline=rajpurkar/squad_v2, extended=rajpurkar/squad_v2 | rajpurkar/squad_v2 | From Parameter list; see Execution Description With Parameters. |
 | top_k | `--top-k` | smoke=5, baseline=5, extended=5 | 5 | From Parameter list; see Execution Description With Parameters. |
+| embedding_model | `--embedding-model` | smoke=BAAI/bge-small-en-v1.5, baseline=BAAI/bge-small-en-v1.5, extended=BAAI/bge-small-en-v1.5 | BAAI/bge-small-en-v1.5 | From Parameter list; see Execution Description With Parameters. |
 | query_length | `--query-length` | smoke=32, baseline=32, extended=32 | 32 | From Parameter list; see Execution Description With Parameters. |
 | batch_size | `--batch-size` | smoke=2, baseline=8, extended=8 | 8 | From Parameter list; see Execution Description With Parameters. |
+| llm_model | `--llm-model` | smoke=mistralai/Mistral-7B-v0.3, baseline=mistralai/Mistral-7B-v0.3, extended=mistralai/Mistral-7B-v0.3 | mistralai/Mistral-7B-v0.3 | From Parameter list; see Execution Description With Parameters. |
 | query_count | `--query-count` | smoke=2, baseline=45, extended=140 | 45 | From Parameter list; see Execution Description With Parameters. |
+| reranker_model | `--reranker-model` | smoke=BAAI/bge-reranker-base, baseline=BAAI/bge-reranker-base, extended=BAAI/bge-reranker-base | BAAI/bge-reranker-base | From Parameter list; see Execution Description With Parameters. |
 
 ## Invocation
 
