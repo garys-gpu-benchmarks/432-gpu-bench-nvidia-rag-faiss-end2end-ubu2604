@@ -21,7 +21,7 @@ Run scripts/gpu-bench-rag-faiss-end2end.py: load rajpurkar/squad_v2, embed with 
 Measure end-to-end RAG retrieval plus generation performance
 
 ## Validation Objective
-Validates squad_v2 retrieval plus BGE embedding, FAISS search, reranking, and Mistral generation for the yaml query count
+Validates squad_v2 retrieval, BGE embeddings, FAISS search, reranking, and Mistral generation
 
 ## Workload Category
 End-to-End Application Pipelines

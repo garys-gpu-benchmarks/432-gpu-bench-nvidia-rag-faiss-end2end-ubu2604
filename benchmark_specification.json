@@ -37,7 +37,7 @@
   {
     "field_name": "Metrics",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "#1: E2E mean over queries, ms (end_to_end_query_latency_retrieval_generation_ms); #2: Generation TTFT, ms (generation_phase_time_to_first_token_ms); #3: Retrieval latency (retrieval_latency_vector_search_ms); #4: Gen throughput, tok/s (generation_throughput_output_tokens_s); #5: Embedding throughput, chunks/s (embedding_throughput_chunks_s); #6: FAISS index vectors (faiss_index_ntotal)"
+    "value": "#1: E2E mean over queries, ms (end_to_end_query_latency_retrieval_generation_ms); #2: Generation TTFT, ms (generation_phase_time_to_first_token_ms); #3: CPU FAISS retrieval latency, ms (retrieval_latency_vector_search_ms); #4: Gen throughput, tok/s (generation_throughput_output_tokens_s); #5: Embedding throughput, chunks/s (embedding_throughput_chunks_s); #6: FAISS index vectors (faiss_index_ntotal)"
   },
   {
     "field_name": "Parameter_01",
@@ -140,6 +140,16 @@
     "value": "-"
   },
   {
+    "field_name": "Validation Objective",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Validates squad_v2 retrieval, BGE embeddings, FAISS search, reranking, and Mistral generation"
+  },
+  {
+    "field_name": "Command Tools Executed",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Run scripts/gpu-bench-rag-faiss-end2end.py for squad_v2 retrieval, BGE embeddings, FAISS search, and Mistral generation"
+  },
+  {
     "field_name": "run_benchmark Command Plus Options for Smoke Run (One minute or less)",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "bash run_benchmark.sh --smoke --validate --chunk-size 64 --chunk-overlap 32 --corpus-dataset rajpurkar/squad_v2 --top-k 5 --embedding-model BAAI/bge-small-en-v1.5 --query-length 32 --batch-size 2 --llm-model mistralai/Mistral-7B-v0.3 --query-count 2 --reranker-model BAAI/bge-reranker-base"
@@ -153,16 +163,6 @@
     "field_name": "run_benchmark Command Plus Options for Extended Run (8 to 15 minutes)",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "bash run_benchmark.sh --extended --validate --chunk-size 256 --chunk-overlap 32 --corpus-dataset rajpurkar/squad_v2 --top-k 5 --embedding-model BAAI/bge-small-en-v1.5 --query-length 32 --batch-size 8 --llm-model mistralai/Mistral-7B-v0.3 --query-count 140 --reranker-model BAAI/bge-reranker-base"
-  },
-  {
-    "field_name": "Validation Objective",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Validates squad_v2 retrieval plus BGE embedding, FAISS search, reranking, and Mistral generation for the yaml query count"
-  },
-  {
-    "field_name": "Command Tools Executed",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Run scripts/gpu-bench-rag-faiss-end2end.py for squad_v2 retrieval, BGE embeddings, FAISS search, and Mistral generation"
   },
   {
     "field_name": "Command Execution Details and Purpose",
@@ -412,7 +412,7 @@
   {
     "field_name": "Profile Parameter Values",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Parameters_SmokeBaselineExtend",
-    "value": "{\"chunk_size\": {\"smoke\": \"64\", \"baseline\": \"256\", \"extended\": \"256\", \"notes\": \"\"}, \"chunk_overlap\": {\"smoke\": \"32\", \"baseline\": \"32\", \"extended\": \"32\", \"notes\": \"\"}, \"corpus_dataset\": {\"smoke\": \"rajpurkar/squad_v2\", \"baseline\": \"rajpurkar/squad_v2\", \"extended\": \"rajpurkar/squad_v2\", \"notes\": \"Pinned local HF/FAISS IDs. Mistral-7B-v0.3 is the cached snapshot.\"}, \"top_k\": {\"smoke\": \"5\", \"baseline\": \"5\", \"extended\": \"5\", \"notes\": \"\"}, \"embedding_model\": {\"smoke\": \"BAAI/bge-small-en-v1.5\", \"baseline\": \"BAAI/bge-small-en-v1.5\", \"extended\": \"BAAI/bge-small-en-v1.5\", \"notes\": \"Pinned local HF/FAISS IDs. Mistral-7B-v0.3 is the cached snapshot.\"}, \"query_length\": {\"smoke\": \"32\", \"baseline\": \"32\", \"extended\": \"32\", \"notes\": \"\"}, \"batch_size\": {\"smoke\": \"2\", \"baseline\": \"8\", \"extended\": \"8\", \"notes\": \"\"}, \"llm_model\": {\"smoke\": \"mistralai/Mistral-7B-v0.3\", \"baseline\": \"mistralai/Mistral-7B-v0.3\", \"extended\": \"mistralai/Mistral-7B-v0.3\", \"notes\": \"Pinned local HF/FAISS IDs. Mistral-7B-v0.3 is the cached snapshot.\"}, \"query_count\": {\"smoke\": \"2\", \"baseline\": \"45\", \"extended\": \"140\", \"notes\": \"2026-08-19: cap baseline=100 extended=250 so 10-repeat loops do not hang. Prior 10080000/16560000 was copied from AMD and is not usable on this collector. | 2026-09-28 GARY_LEDGER (aggregated_runtime_ledgers_101_201_301_401_20260928_9am; targets baseline 3-5 min, extended 8-15 min): 100/250 -> 220/680. baseline 100 measured 1:57/2:09, extended 250 measured 4:35. Two-point fit ~1.0 s/query + ~22 s fixed. 220/680 targets ~4:00 / ~11:50. Unconfirmed by a fresh run. | 2026-10-03: baseline 220 measured 11:44, extended 680 measured about 41:00. 75/190 targets ~4:00 / ~11:27. Baseline 75 uses the 400-context corpus.\"}, \"reranker_model\": {\"smoke\": \"BAAI/bge-reranker-base\", \"baseline\": \"BAAI/bge-reranker-base\", \"extended\": \"BAAI/bge-reranker-base\", \"notes\": \"Pinned local HF/FAISS IDs. Mistral-7B-v0.3 is the cached snapshot.\"}}"
+    "value": "{\"chunk_size\": {\"smoke\": \"64\", \"baseline\": \"256\", \"extended\": \"256\"}, \"chunk_overlap\": {\"smoke\": \"32\", \"baseline\": \"32\", \"extended\": \"32\"}, \"corpus_dataset\": {\"smoke\": \"rajpurkar/squad_v2\", \"baseline\": \"rajpurkar/squad_v2\", \"extended\": \"rajpurkar/squad_v2\"}, \"top_k\": {\"smoke\": \"5\", \"baseline\": \"5\", \"extended\": \"5\"}, \"embedding_model\": {\"smoke\": \"BAAI/bge-small-en-v1.5\", \"baseline\": \"BAAI/bge-small-en-v1.5\", \"extended\": \"BAAI/bge-small-en-v1.5\"}, \"query_length\": {\"smoke\": \"32\", \"baseline\": \"32\", \"extended\": \"32\"}, \"batch_size\": {\"smoke\": \"2\", \"baseline\": \"8\", \"extended\": \"8\"}, \"llm_model\": {\"smoke\": \"mistralai/Mistral-7B-v0.3\", \"baseline\": \"mistralai/Mistral-7B-v0.3\", \"extended\": \"mistralai/Mistral-7B-v0.3\"}, \"query_count\": {\"smoke\": \"2\", \"baseline\": \"45\", \"extended\": \"140\"}, \"reranker_model\": {\"smoke\": \"BAAI/bge-reranker-base\", \"baseline\": \"BAAI/bge-reranker-base\", \"extended\": \"BAAI/bge-reranker-base\"}}"
   },
   {
     "field_name": "Profile Command Authorship",
