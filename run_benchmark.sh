@@ -32,14 +32,18 @@ Profiles (default: --smoke):
 Parameters (override the profile's value):
   --chunk-size <value>          Shared workload parameter (smoke 64, baseline 256, extended 256)
   --chunk-overlap <value>       Shared workload parameter (smoke/baseline/extended: 32)
-  --corpus-dataset <value>      Shared workload parameter (smoke/baseline/extended: rajpurkar/squad_v2)
+  --corpus-dataset <value>      Shared workload parameter
+                                  all profiles: rajpurkar/squad_v2
   --top-k <value>               Shared workload parameter (smoke/baseline/extended: 5)
-  --embedding-model <value>     Shared workload parameter (smoke/baseline/extended: BAAI/bge-small-en-v1.5)
+  --embedding-model <value>     Shared workload parameter
+                                  all profiles: BAAI/bge-small-en-v1.5
   --query-length <value>        Shared workload parameter (smoke/baseline/extended: 32)
   --batch-size <n>              Number of items processed together (smoke 2, baseline 8, extended 8)
-  --llm-model <value>           Shared workload parameter (smoke/baseline/extended: mistralai/Mistral-7B-v0.3)
+  --llm-model <value>           Shared workload parameter
+                                  all profiles: mistralai/Mistral-7B-v0.3
   --query-count <value>         Shared workload parameter (smoke 2, baseline 45, extended 140)
-  --reranker-model <value>      Shared workload parameter (smoke/baseline/extended: BAAI/bge-reranker-base)
+  --reranker-model <value>      Shared workload parameter
+                                  all profiles: BAAI/bge-reranker-base
 
 General options:
   --config <file>               Config file (default: config/benchmark_config.yaml)
