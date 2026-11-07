@@ -16,12 +16,11 @@ capture_benchmark_run_command_submitted "$@"
 
 usage() {
   cat <<'USAGE'
+
 Usage: bash run_benchmark.sh [OPTIONS]
 
 Workload Name:          RAG Pipeline Sweep.
 Main Goal:              Measure end-to-end RAG retrieval plus generation performance.
-Validation Objective:   Validates squad_v2 retrieval, BGE embeddings, FAISS search, reranking, and
-                        Mistral generation.
 Command Tools Executed: Run scripts/gpu-bench-rag-faiss-end2end.py for squad_v2 retrieval, BGE
                         embeddings, FAISS search, and Mistral generation.
 

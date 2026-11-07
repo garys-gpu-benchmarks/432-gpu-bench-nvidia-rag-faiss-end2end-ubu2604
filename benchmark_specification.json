@@ -35,6 +35,11 @@
     "value": "Measure end-to-end RAG retrieval plus generation performance"
   },
   {
+    "field_name": "Command Tools Executed",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Run scripts/gpu-bench-rag-faiss-end2end.py for squad_v2 retrieval, BGE embeddings, FAISS search, and Mistral generation"
+  },
+  {
     "field_name": "Metrics",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "#1: E2E mean over queries, ms (end_to_end_query_latency_retrieval_generation_ms); #2: Generation TTFT, ms (generation_phase_time_to_first_token_ms); #3: CPU FAISS retrieval latency, ms (retrieval_latency_vector_search_ms); #4: Gen throughput, tok/s (generation_throughput_output_tokens_s); #5: Embedding throughput, chunks/s (embedding_throughput_chunks_s); #6: FAISS index vectors (faiss_index_ntotal)"
@@ -140,16 +145,6 @@
     "value": "-"
   },
   {
-    "field_name": "Validation Objective",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Validates squad_v2 retrieval, BGE embeddings, FAISS search, reranking, and Mistral generation"
-  },
-  {
-    "field_name": "Command Tools Executed",
-    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
-    "value": "Run scripts/gpu-bench-rag-faiss-end2end.py for squad_v2 retrieval, BGE embeddings, FAISS search, and Mistral generation"
-  },
-  {
     "field_name": "run_benchmark Command Plus Options for Smoke Run (One minute or less)",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "bash run_benchmark.sh --smoke --validate --chunk-size 64 --chunk-overlap 32 --corpus-dataset rajpurkar/squad_v2 --top-k 5 --embedding-model BAAI/bge-small-en-v1.5 --query-length 32 --batch-size 2 --llm-model mistralai/Mistral-7B-v0.3 --query-count 2 --reranker-model BAAI/bge-reranker-base"
@@ -163,6 +158,11 @@
     "field_name": "run_benchmark Command Plus Options for Extended Run (8 to 15 minutes)",
     "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
     "value": "bash run_benchmark.sh --extended --validate --chunk-size 256 --chunk-overlap 32 --corpus-dataset rajpurkar/squad_v2 --top-k 5 --embedding-model BAAI/bge-small-en-v1.5 --query-length 32 --batch-size 8 --llm-model mistralai/Mistral-7B-v0.3 --query-count 140 --reranker-model BAAI/bge-reranker-base"
+  },
+  {
+    "field_name": "Validation Objective",
+    "source_file": "BenchmarkSpecDefinitions.xlsx::Workload_Definitions",
+    "value": "Validates squad_v2 retrieval, BGE embeddings, FAISS search, reranking, and Mistral generation"
   },
   {
     "field_name": "Command Execution Details and Purpose",
