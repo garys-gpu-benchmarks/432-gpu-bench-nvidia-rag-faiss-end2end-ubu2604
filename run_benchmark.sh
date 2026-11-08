@@ -19,10 +19,10 @@ usage() {
 
 Usage: bash run_benchmark.sh [OPTIONS]
 
-Workload Name:          RAG Pipeline Sweep.
-Main Goal:              Measure end-to-end RAG retrieval plus generation performance.
+Workload Name:          RAG Pipeline Sweep
+Main Goal:              Measure end-to-end RAG retrieval plus generation performance
 Command Tools Executed: Run scripts/gpu-bench-rag-faiss-end2end.py for squad_v2 retrieval, BGE
-                        embeddings, FAISS search, and Mistral generation.
+                        embeddings, FAISS search, and Mistral generation
 
 Profiles (default: --smoke):
   --smoke                       Run smoke profile

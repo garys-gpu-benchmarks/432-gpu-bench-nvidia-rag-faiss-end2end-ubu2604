@@ -18,7 +18,7 @@ bash run_benchmark.sh --smoke
 
 `run_benchmark.sh` runs setup by itself if it has not been run yet. Each run prints its metrics when it finishes.
 
-The model `mistralai/Mistral-7B-v0.3` is gated on Hugging Face. Set `HF_TOKEN` before setup (see [Troubleshooting](#troubleshooting)).
+The model `mistralai/Mistral-7B-v0.3` may be gated on Hugging Face. If its download is refused, set `HF_TOKEN` (see [Troubleshooting](#troubleshooting)).
 
 ## Profiles and Parameters
 
@@ -76,7 +76,7 @@ Every run is checked for completeness and against any `thresholds:` or `baseline
 ## Requirements
 
 - Ubuntu 26.04, root or sudo for `setup.sh`
-- NVIDIA GPU with CUDA 13.3 (validated on H100 SXM 80GB)
+- NVIDIA GPU with CUDA 13.3
 - CUDA Runtime, PyTorch-CUDA, Hugging Face Transformers, Mistral-7B-v0.3, FAISS, LlamaIndex, BGE embed/rerank, squad_v2, Hugging Face Datasets, huggingface_hub, NumPy, llama_index, Python 3.14. `setup.sh` installs what is missing; Python packages go into a repo-local `.venv`.
 - A Hugging Face token with access to `mistralai/Mistral-7B-v0.3`
 
@@ -99,7 +99,7 @@ Other platforms: [AMD 24.04](https://github.com/garys-gpu-benchmarks/bundle-amd-
 ## Troubleshooting
 
 - **SSH dropped during setup:** reconnect and run `sudo bash setup.sh --assume-yes` again. It resumes; do not delete `.venv` or `.cache`.
-- **Model download refused (401 or 403):** `mistralai/Mistral-7B-v0.3` is gated. Accept its license on Hugging Face, then `export HF_TOKEN=<token>` and run setup with `sudo -E bash setup.sh --assume-yes` so the token reaches it.
+- **Model download refused (401 or 403):** `mistralai/Mistral-7B-v0.3` may be gated. Accept its license on Hugging Face, then `export HF_TOKEN=<token>` and run setup with `sudo -E bash setup.sh --assume-yes` so the token reaches it.
 - **A metric reads `na`:** the run could not measure it on this host. The reason is in the run's `metrics_summary.txt` and `errors_info.txt`; see also [Notes](#notes).
 
 ## Repository Layout
