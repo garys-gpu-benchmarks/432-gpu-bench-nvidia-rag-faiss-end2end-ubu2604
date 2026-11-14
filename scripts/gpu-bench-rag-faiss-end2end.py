@@ -30,6 +30,26 @@ from prefetch_rag_models import ensure_mistral
 from rag_model_paths import find_local_causal_lm, reject_missing_causal_weights
 
 
+def mark_measure_start() -> None:
+    """Setup ends here: record when the timed work starts (TEMPLATE_00_141).
+
+    run_benchmark.sh reads BENCHMARK_MEASURE_START_FILE when the benchmark stops and
+    starts the benchmark clock at this time, so model load and warmup count as setup.
+    The first call of a run wins. Outside run_benchmark.sh it does nothing.
+    """
+    import os
+    import time
+
+    path = os.environ.get("BENCHMARK_MEASURE_START_FILE", "")
+    if not path or os.path.exists(path):
+        return
+    try:
+        with open(path, "w", encoding="utf-8") as handle:
+            handle.write(f"{time.time_ns()}\n")
+    except OSError:
+        pass
+
+
 def _dtype_kwarg() -> str:
     try:
         major, minor = (int(part) for part in transformers.__version__.split(".")[:2])
@@ -302,6 +322,7 @@ def main() -> int:
 
     embed_tok = AutoTokenizer.from_pretrained(embedding_id)
     embed_model = AutoModel.from_pretrained(embedding_id).to(device)
+    mark_measure_start()  # setup ends: model loaded, warmup done
     embed_start = time.perf_counter()
     doc_vectors = encode_texts(embed_model, embed_tok, chunks, device, batch_size=min(32, max(batch_size, 8)), max_length=512)
     torch.cuda.synchronize()
